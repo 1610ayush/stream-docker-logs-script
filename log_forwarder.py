@@ -50,12 +50,13 @@ def main():
 
 def periodic_nginx_request():
     while True:
-        try:
-            response = requests.get(NGINX_URL)
-            print(f"Pinged Nginx: Status Code {response.status_code}")
-        except requests.exceptions.RequestException as e:
-            print(f"Failed to ping Nginx: {e}")
-        time.sleep(60)
+        for _ in range(10):
+            try:
+                response = requests.get(NGINX_URL)
+                print(f"Pinged Nginx: Status Code {response.status_code}")
+            except requests.exceptions.RequestException as e:
+                print(f"Failed to ping Nginx: {e}")
+            time.sleep(0.1) 
 
 if __name__ == "__main__":
     main()
