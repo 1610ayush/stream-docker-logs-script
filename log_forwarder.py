@@ -1,12 +1,13 @@
 import subprocess
 import requests
+import datetime
 import sys
 import time
 import threading
 
 CONTAINER_NAME = "nginx"
 HTTP_ENDPOINT = "https://6755-2405-201-d003-d80e-fb7c-ab03-d407-b361.ngrok-free.app/log" 
-NGINX_URL = "http://localhost:80"
+NGINX_URL = "http://localhost:8000"
 
 def stream_docker_logs():
     process = subprocess.Popen(
@@ -50,13 +51,12 @@ def main():
 
 def periodic_nginx_request():
     while True:
-        for _ in range(10):
-            try:
-                response = requests.get(NGINX_URL)
-                print(f"Pinged Nginx: Status Code {response.status_code}")
-            except requests.exceptions.RequestException as e:
-                print(f"Failed to ping Nginx: {e}")
-            time.sleep(0.1) 
+        try:
+            response = requests.get(NGINX_URL)
+            print(f"[{datetime.datetime.now()}] Pinged Nginx: Status Code {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"[{datetime.datetime.now()}] Failed to ping Nginx: {e}")
+        time.sleep(20)
 
 if __name__ == "__main__":
     main()
