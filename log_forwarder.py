@@ -6,7 +6,7 @@ import time
 import threading
 
 CONTAINER_NAME = "nginx"
-HTTP_ENDPOINT = "https://6755-2405-201-d003-d80e-fb7c-ab03-d407-b361.ngrok-free.app/log" 
+HTTP_ENDPOINT = "http://ayush-test.superapi.tech:8080/log" 
 NGINX_URL = "http://localhost:8000"
 
 def stream_docker_logs():
